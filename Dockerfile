@@ -40,8 +40,8 @@ RUN cd /opt/openauto && mkdir -p build && cd build && \
     cmake -DCMAKE_BUILD_TYPE=Release -DRPI3_BUILD=OFF \
       -DAASDK_INCLUDE_DIRS=/opt/aasdk/include \
       -DAASDK_LIBRARIES=/opt/aasdk/lib/libaasdk.so \
-      -DAASDK_PROTO_INCLUDE_DIRS=/opt/aasdk/aasdk_proto \
-      -DAASDK_PROTO_LIBRARIES=/opt/aasdk/aasdk_proto/libaasdk_proto.so .. && \
+      -DAASDK_PROTO_INCLUDE_DIRS=/opt/aasdk/build \
+      -DAASDK_PROTO_LIBRARIES=/opt/aasdk/lib/libaasdk_proto.so .. && \
     make -j2
 RUN mkdir -p /output && \
     cp /opt/openauto/bin/autoapp /opt/openauto/bin/btservice /output/ && \
