@@ -1,0 +1,23 @@
+name: Build OpenAuto
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build -t openauto-builder .
+      - name: Extract artifacts
+        run: |
+          mkdir -p artifacts
+          docker create --name tmp openauto-builder
+          docker cp tmp:/output/. artifacts/
+          docker rm tmp
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: openauto
+          path: artifacts/
+          retention-days: 7
